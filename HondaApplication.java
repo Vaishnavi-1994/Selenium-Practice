@@ -97,7 +97,30 @@ public class HondaApplication
 //		15) Click Search
 		driver.findElementByXPath("//button[text()='Search']").click();
 //		16) Print all the 3 models and their prices
-		System.out.println(driver.findElementByXPath("//table[@id='gvshow']").getText());
+		//access table
+		WebElement table1 = driver.findElement(By.xpath("//table[@id='gvshow']"));
+		//Get Header
+        List<WebElement> rowsList = table1.findElements(By.xpath("//table[@id='gvshow']/thead/tr/th/label"));
+        	for (int i = 1; i <=rowsList.size(); i++) 
+        	{
+        		String head1=driver.findElementByXPath("(//table[@id='gvshow']/thead/tr/th/label)["+i+"]").getText();
+        		System.out.println("The "+head1+"index of"+i);
+        		        		
+        	}
+        	//Get Row
+        	List<WebElement> row2 = table1.findElements(By.xpath("//tr[@class='headlbl']/th"));
+        	for (int j = 1; j <=row2.size(); j++) 
+        	{
+				System.out.println(driver.findElementByXPath("(//tr[@class='headlbl']/th)["+j+"]").getText());
+				
+			}
+        	//Get Row Values
+        	List<WebElement> rowValue = table1.findElements(By.xpath("//table[@id='gvshow']//tbody/tr/td"));
+        	for(int i=1;i<=rowValue.size();i++)
+        	{
+        		System.out.println(driver.findElementByXPath("(//table[@id='gvshow']//tbody/tr/td)["+i+"]").getText());
+        	}
+		
 //		17) Close all the Windows
 		driver.close();
 		driver.switchTo().window(listhandles.get(0));
